@@ -3,6 +3,10 @@ if &term == "alacritty"
       let &term = "xterm-256color"
   endif
 
+" new dir for temp and swap files
+set backupdir=~/vimtmp//,.
+set directory=~/vimtmp//,.
+
 " Auto plugin install for plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -44,6 +48,10 @@ Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+
+" Xml commenting for c#
+Plug 'jpfeiffer16/angeldoc-vim'
+nnoremap /// :call AngelDoc#InsertXmlDoc()<CR>
 
 " Snippet support
 if s:using_snippets
@@ -127,6 +135,8 @@ let g:ale_sign_style_error = '·'
 let g:ale_sign_style_warning = '·'
 
 let g:ale_linters = { 'cs': ['OmniSharp'] }
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 " }}}
 
 " Asyncomplete: {{{
@@ -215,4 +225,4 @@ let g:OmniSharp_highlight_groups = {
 \ 'ExcludedCode': 'NonText'
 \}
 " }}}
-hi ALEWarning cterm=undercurl gui=undercurl guisp=#fb4934
+let g:ale_set_highlights = 0
