@@ -14,9 +14,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Set this to 1 to use ultisnips for snippet handling
-let s:using_snippets = 0
-
 " vim-plug: {{{
 call plug#begin('~/.vim/plugged')
 
@@ -32,9 +29,6 @@ Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Autocompletion
-Plug 'prabirshrestha/asyncomplete.vim'
-
 " Colorscheme
 Plug 'gruvbox-community/gruvbox'
 
@@ -47,19 +41,17 @@ Plug 'maximbaz/lightline-ale'
 Plug 'jiangmiao/auto-pairs'
 
 " Snippets
-Plug 'tomtom/tlib_vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
+Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
+" had to add this plugin cuz utils break sessions.
+Plug 'tpope/vim-obsession'
+
+" Autocompletion
+Plug 'prabirshrestha/asyncomplete.vim'
 
 " Xml commenting for c#
 Plug 'jpfeiffer16/angeldoc-vim'
 nnoremap /// :call AngelDoc#InsertXmlDoc()<CR>
-
-" Snippet support
-if s:using_snippets
-  Plug 'sirver/ultisnips'
-endif
 
 call plug#end()
 " }}}
@@ -143,6 +135,10 @@ highlight clear ALEWarningSign
 " }}}
 
 " Asyncomplete: {{{
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
 " }}}
@@ -220,9 +216,7 @@ let g:OmniSharp_popup_mappings = {
 \ 'pageUp': ['<C-b>', '<PageUp>']
 \}
 
-if s:using_snippets
-  let g:OmniSharp_want_snippet = 1
-endif
+let g:OmniSharp_want_snippet = 1
 
 let g:OmniSharp_highlight_groups = {
 \ 'ExcludedCode': 'NonText'
