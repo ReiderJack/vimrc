@@ -100,6 +100,14 @@ let mapleader = "\<Space>"
 map <Leader>a ggVG
 " }}}
 
+" Ultisnips: {{{
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" }}}
+
 " Colors: {{{
 augroup ColorschemePreferences
   autocmd!
