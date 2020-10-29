@@ -230,4 +230,12 @@ let g:OmniSharp_highlight_groups = {
 \ 'ExcludedCode': 'NonText'
 \}
 " }}}
+hi clear ModeMsg    gui=underline
+hi ModeMsg    gui=underline
+hi clear Identifier gui=underline
+hi Identifier gui=underline
+hi clear WarningMsg gui=underline
+hi WarningMsg gui=underline
+hi clear GruvboxYellowUnderline 
+hi GruvboxYellowUnderline gui=underline term=underline cterm=underline guifg=NONE guibg=NONE
 let g:ale_set_highlights = 0
